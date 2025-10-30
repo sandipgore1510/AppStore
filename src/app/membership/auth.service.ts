@@ -3,11 +3,15 @@ import { Injectable } from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class AuthService {
   status:boolean=false;
-
+ List: String[] =[
+ "Sandip","Gore"
+ ]
   validate(user: string, password: string): boolean {
-     
-      return false;
-     
+   if(this.List.includes(user))
+      return true;
+
+   return false;
+
  }
 
  logout(): any {   }

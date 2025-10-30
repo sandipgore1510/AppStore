@@ -16,10 +16,27 @@ export class Credential  {
 })
 export class SignInComponent {
 
-  isValidUser:boolean=false;
-  user: Credential=new Credential("ravi.tambade@transflower.in","seed");
- 
-  constructor(private svc:AuthService) {    }  //DI
+   email: string = '';
+   password: string = '';
+  isValidUser:boolean = false;
 
- 
+
+  constructor(private svc:AuthService) {    }  //DI
+onSubmit(form: any) {
+
+  if( this.svc.validate(form.value.userEmail,form.value.userPassword)){
+this.isValidUser=true
+
+  }
+  else
+  {
+    this.isValidUser=false
+  }
+  this.email="";
+this.password="";
+  console.log(form.value);
+
+
+}
+
 }

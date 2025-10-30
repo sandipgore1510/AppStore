@@ -1,24 +1,29 @@
-<div >
+<div class="login-container">
   <h1>Login</h1>
 
-   <div >   
-       <form >
+   <div >
+       <form #loginform="ngForm" (ngSubmit)="onSubmit(loginform)">
         <table>
-              <tr>
+              <tr class="form-group">
                 <td><label>Email:</label></td>
-                <td> 
-                  <input type="email" name="userEmail" 
-                         required  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" />
+                <td>
+                  <input type="email" name="userEmail"
+                         required  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" [(ngModel)]="email"  #emailRef="ngModel"/>
               </tr>
               <tr>
                 <td><label>Password:</label></td>
-                <input type="password" name="userPassword" required />
-              
-              </tr>   
-              <tr>
-                  <td><button type="submit" > Submit</button> </td>
+                <input type="password" name="userPassword" required [(ngModel)]="password" #passwordRef="ngModel"/>
+
               </tr>
+
+              <tr>
+                  <td><button type="submit" class="btn btn-primary"> Submit</button> </td>
+              </tr>
+
         </table>
+
     </form>
+    <span *ngIf="isValidUser"> Login Successfully</span>
+    <span *ngIf="!isValidUser"> Invalid User Name</span>
     </div>
 </div>
