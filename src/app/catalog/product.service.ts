@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from './models/product';
+import { CartService } from '../shopping-cart/cart.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -13,13 +14,18 @@ export class ProductService {
       {"id": 17,  "title":"Marigold", "description": "Festival flower","price":4,"likes":56000, "imageurl":"/assets/images/marigold.jpg"},
   ]
 
-  constructor() { }
- 
+  constructor(private crd: CartService) { }
+
   getAll():  Product[]{
     return this.products;
   }
+  Addtocart(item:any){
 
-  
+    this.crd.addToCart(item);
+    alert("Item added to cart");
+  }
+
+
   getById(id: number):Product {
     return this.products.find(p => p.id === id) as Product;
   }
@@ -37,8 +43,8 @@ export class ProductService {
     }
     return product;
   }
-  
+
   delete(id: number): void {
     this.products = this.products.filter(p => p.id !== id);
   }
-  } 
+  }

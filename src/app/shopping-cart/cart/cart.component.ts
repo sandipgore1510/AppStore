@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Item as CartItem } from '../models/Item';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Item as CartItem, Item } from '../models/Item';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../cart.service';
 
 
 @Component({
@@ -15,9 +16,17 @@ export class CartComponent {
  cartItems: CartItem[] = [];
   totalPrice = 0;
 
-  constructor() {}
 
-  loadCart() {}
+ constructor(private crd:CartService){
+  this.cartItems=crd.getCartItems();
+  console.log(this.cartItems);
+
+ }
+
+  Remove(item:CartItem) {
+   console.log(item);
+    this.crd.removeFromCart(item.title);
+  }
 
   removeItem(id: number) { }
 

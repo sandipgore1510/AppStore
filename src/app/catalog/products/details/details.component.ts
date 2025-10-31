@@ -3,6 +3,7 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../product.service';
 import { CommonModule } from '@angular/common';
 import { CounterComponent } from '../counter/counter.component';
+import { CartService } from '../../../shopping-cart/cart.service';
 
 @Component({
   selector: 'app-details',
@@ -12,15 +13,21 @@ import { CounterComponent } from '../counter/counter.component';
   styleUrl: './details.component.css'
 })
 export class DetailsComponent implements OnInit {
- 
+
    @Input () product: Product|undefined;
 
     ngOnInit() {}
-    
- 
+
+  constructor(private crt:CartService){
+
+  }
    onUpdate(data:any){
      if(this.product != undefined)
          this.product.likes=data.count;
+   }
+   AddtoCard(prd:any){
+    this.crt.addToCart(prd);
+     console.log(prd);
    }
 
 

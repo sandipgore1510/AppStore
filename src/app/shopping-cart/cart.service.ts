@@ -7,37 +7,41 @@ export class CartService {
 
 private storageKey = 'shoppingCart';
 
+ CartItems:CartItem[] =[];
   constructor() {
     // Initialize sessionStorage with demo data if empty
     //if (!sessionStorage.getItem(this.storageKey)) {
-  
-     
+
+
   }
 
   //Add Product to Cart
   addToCart(item: CartItem): void {
-     
+      this.CartItems.push(item);
+      alert("added item to cart");
   }
 
   //Get All Cart Items
   getCartItems(): CartItem[] {
-    
-    return [];
+
+    return this.CartItems;
   }
 
   //Update Quantity
   updateQuantity(productId: number, quantity: number): void {
-     
+
   }
 
   //Remove Product from Cart
-  removeFromCart(productId: number): void {
-   
+  removeFromCart(title: string): void {
+   this.CartItems= this.CartItems.filter(x=>x.title !==title);
+   alert("Card updated");
+   console.log(this.CartItems);
   }
 
   //Clear Entire Cart
   clearCart(): void {
-  
+
   }
 
   //Calculate Total Items
