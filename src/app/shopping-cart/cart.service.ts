@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Item as CartItem } from './models/Item';
+import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-
+private readonly cartList = new Subject<CartItem[]>();
+latestCartlist = this.cartList.asObservable()
 private storageKey = 'shoppingCart';
 
  CartItems:CartItem[] =[];
@@ -18,13 +20,14 @@ private storageKey = 'shoppingCart';
   //Add Product to Cart
   addToCart(item: CartItem): void {
       this.CartItems.push(item);
+      this.cartList.next(this.CartItems)
       alert("added item to cart");
   }
 
   //Get All Cart Items
-  getCartItems(): CartItem[] {
-
-    return this.CartItems;
+  getCartItems() {
+    this.CartItems;
+    this.cartList.next(this.CartItems)
   }
 
   //Update Quantity
@@ -33,8 +36,10 @@ private storageKey = 'shoppingCart';
   }
 
   //Remove Product from Cart
-  removeFromCart(title: string): void {
-   this.CartItems= this.CartItems.filter(x=>x.title !==title);
+  removeFromCart(index: number): void {
+   this.CartItems= this.CartItems.splice(index, 1 );
+
+  this.cartList.next(this.CartItems)
    alert("Card updated");
    console.log(this.CartItems);
   }

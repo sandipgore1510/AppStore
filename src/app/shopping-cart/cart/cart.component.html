@@ -14,9 +14,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of cartItems">
+          <tr *ngFor="let item of cartItems; let i = index">
             <td class="text-center">
-              <img src=item.imageUrl width="60" height="60" class="rounded">
+              <img [src]=item.imageUrl width="60" height="60" class="rounded">
             </td>
 
             <td>{{item.title}}</td>
@@ -28,7 +28,7 @@
             </td>
             <td class="text-end">₹ {{item.price}}</td>
             <td class="text-center">
-              <button class="btn btn-sm btn-outline-danger" (click)="Remove(item)">
+              <button class="btn btn-sm btn-outline-danger" (click)="Remove(i)">
                 <i class="bi bi-trash"></i> Remove
               </button>
             </td>

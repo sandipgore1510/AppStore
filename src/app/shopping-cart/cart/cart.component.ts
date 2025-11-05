@@ -18,14 +18,14 @@ export class CartComponent {
 
 
  constructor(private crd:CartService){
-  this.cartItems=crd.getCartItems();
-  console.log(this.cartItems);
-
+  this.crd.latestCartlist.subscribe(res => {
+    this.cartItems = res;
+    console.log(res);
+  })
  }
 
-  Remove(item:CartItem) {
-   console.log(item);
-    this.crd.removeFromCart(item.title);
+  Remove(index: number) {
+    this.crd.removeFromCart(index);
   }
 
   removeItem(id: number) { }
