@@ -20,8 +20,10 @@ export class CartComponent {
  constructor(private crd:CartService){
   this.crd.latestCartlist.subscribe(res => {
     this.cartItems = res;
+
     console.log(res);
   })
+   this.cartItems=this.crd.getCartItems();
  }
 
   Remove(index: number) {

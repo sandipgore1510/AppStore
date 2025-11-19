@@ -11,8 +11,7 @@ private storageKey = 'shoppingCart';
 
  CartItems:CartItem[] =[];
   constructor() {
-    // Initialize sessionStorage with demo data if empty
-    //if (!sessionStorage.getItem(this.storageKey)) {
+    this.CartItems=[];
 
 
   }
@@ -25,9 +24,10 @@ private storageKey = 'shoppingCart';
   }
 
   //Get All Cart Items
-  getCartItems() {
+  getCartItems(): any {
     this.CartItems;
     this.cartList.next(this.CartItems)
+    return this.CartItems;
   }
 
   //Update Quantity
