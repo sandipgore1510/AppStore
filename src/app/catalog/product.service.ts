@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Product } from './models/product';
 import { CartService } from '../shopping-cart/cart.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -14,10 +16,15 @@ export class ProductService {
       {"id": 17,  "title":"Marigold", "description": "Festival flower","price":4,"likes":56000, "imageurl":"/assets/images/marigold.jpg"},
   ]
 
-  constructor(private crd: CartService) { }
+  constructor(private crd: CartService,private http:HttpClient) { }
 
   getAll():  Product[]{
+
     return this.products;
+  }
+  getAllFromAPI():  Observable<Product[]>{
+
+   return this.http.get<Product[]>('http://localhost:8000/flowers')
   }
   Addtocart(item:any){
 
